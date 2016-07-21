@@ -17,5 +17,5 @@ from django.conf.urls import url, include
 from boardapp import views
 
 urlpatterns = [
-    url(r'^boards/$', views.board_index.as_view()),
+    url(r'^boards/$', views.BoardIndex.as_view()),
 ]

@@ -10,7 +10,7 @@ class Post(models.Model):
     post_id = models.IntegerField()
 
 class Thread(models.Model):
-    head = models.ForeignKey(Post)
+    head = models.ForeignKey(Post, related_name="head_of")
     posts = models.ManyToManyField(Post, related_name="thread")
 
 class Board(models.Model):

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from anonboard import models
+from boardapp import models
 
 # Register your models here.
 

@@ -24,6 +24,7 @@ class Thread(models.Model):
 
 class Board(models.Model):
     name = models.CharField(max_length=255, unique=True)
+    shortcut = models.CharField(max_length=3, unique=True)
     maximum_threads = models.IntegerField(default=32)
     password = models.CharField(max_length=32)
     threads = models.ManyToManyField(Thread, related_name="board", null=True, blank=True)

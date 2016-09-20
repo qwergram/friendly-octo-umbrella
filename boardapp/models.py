@@ -18,9 +18,9 @@ class Thread(models.Model):
 
     def __str__(self):
         try:
-            return self.head.title
-        except AttributeError:
-            return "[Untitled]"
+            return Post.objects.get(thread=self.pk).title
+        except Post.DoesNotExist:
+            return '[untitled]'
 
 class Board(models.Model):
     name = models.CharField(max_length=255, unique=True)

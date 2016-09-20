@@ -10,7 +10,7 @@
     <body>
         <ul>
             {% for board in boards %}
-                <li>{{board.name}}</li>
+                <li><a href="{% url 'boardView' boardname=board.shortcut %}">{{board.name}}</a></li>
             {% endfor %}
         </ul>
     </body>

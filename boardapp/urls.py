@@ -17,6 +17,6 @@ from django.conf.urls import url, include
 from boardapp import views
 
 urlpatterns = [
-    url(r'^boards/$', views.BoardIndex.as_view()),
-    url(r'(?P<boardname>[A-z0-9])/$', views.ThreadIndex.as_view())
+    url(r'^boards/$', views.BoardIndex.as_view(), name='boardIndex'),
+    url(r'(?P<boardname>[A-z0-9])/$', views.ThreadIndex.as_view(), name='boardView')
 ]

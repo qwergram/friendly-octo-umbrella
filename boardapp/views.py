@@ -10,5 +10,4 @@ class BoardIndex(generic.TemplateView):
     def get_context_data(self):
         context = super().get_context_data()
         context['boards'] = Board.objects.all()
-        # import pdb; pdb.set_trace()
         return context

@@ -8,13 +8,15 @@ class Post(models.Model):
     password = models.CharField(max_length=32, null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     post_id = models.IntegerField()
+    thread = models.ForeignKey('Thread', related_name='posts')
 
     def __str__(self):
         return self.title
 
 class Thread(models.Model):
     head = models.ForeignKey(Post, related_name="head_of")
-    posts = models.ManyToManyField(Post, related_name="thread", blank=True)
+    # posts = models.ManyToManyField(Post, related_name="thread", blank=True)
+    board = models.ForeignKey('Board', related_name='threads')
 
     def __str__(self):
         try:
@@ -27,7 +29,7 @@ class Board(models.Model):
     shortcut = models.CharField(max_length=3, unique=True)
     maximum_threads = models.IntegerField(default=32)
     password = models.CharField(max_length=32)
-    threads = models.ManyToManyField(Thread, related_name="board", blank=True)
+    # threads = models.ManyToManyField(Thread, related_name="board", blank=True)
 
     def __str__(self):
         return self.name

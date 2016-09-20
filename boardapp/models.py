@@ -14,7 +14,7 @@ class Post(models.Model):
 
 class Thread(models.Model):
     head = models.ForeignKey(Post, related_name="head_of")
-    posts = models.ManyToManyField(Post, related_name="thread", null=True, blank=True)
+    posts = models.ManyToManyField(Post, related_name="thread", blank=True)
 
     def __str__(self):
         try:
@@ -27,7 +27,7 @@ class Board(models.Model):
     shortcut = models.CharField(max_length=3, unique=True)
     maximum_threads = models.IntegerField(default=32)
     password = models.CharField(max_length=32)
-    threads = models.ManyToManyField(Thread, related_name="board", null=True, blank=True)
+    threads = models.ManyToManyField(Thread, related_name="board", blank=True)
 
     def __str__(self):
         return self.name

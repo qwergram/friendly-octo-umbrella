@@ -4,8 +4,11 @@ from boardapp.models import Board
 
 # Create your views here.
 
-class BoardIndex(generic.View):
+class BoardIndex(generic.TemplateView):
+    template_name = "boardapp/list_boards.html"
 
-    def get(self, request):
-        boards = Board.objects.all()
-        return HttpResponse(str([str(x) for x in boards]))
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data()
+        context['boards'] = Board.objects.all()
+        # import pdb; pdb.set_trace()
+        return context

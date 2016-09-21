@@ -7,7 +7,6 @@ class Post(models.Model):
     content = models.TextField()
     password = models.CharField(max_length=32, null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
-    post_id = models.IntegerField()
     thread = models.ForeignKey('Thread', related_name='posts')
 
     def __str__(self):

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{{thread}}</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="posts">
+            {% for post in posts %}
+                <a href="{% url 'threadView' boardname=thread.board.shortcut threadid=thread.pk %}#{{post.pk}}"><b id="{{post.pk}}">{{post}}</h1></b></a>
+                <p>{{post.content}}</p>
+            {% endfor %}
+        </div>
+    </body>
+</html>

@@ -19,8 +19,7 @@ class ThreadIndex(generic.TemplateView):
         context = super().get_context_data()
         board = get_object_or_404(Board, shortcut=boardname)
         context['board'] = board
-        context['threads'] = Thread.objects.filter(board=board)
-        # import pdb; pdb.set_trace()
+        context['threads'] = board.threads.all()
         return context
 
 
@@ -31,4 +30,5 @@ class ThreadView(generic.TemplateView):
         context = super().get_context_data()
         thread = get_object_or_404(Thread, pk=threadid)
         context['thread'] = thread
+        context['posts'] = thread.posts.all()
         return context

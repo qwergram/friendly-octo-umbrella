@@ -21,6 +21,10 @@ class Thread(models.Model):
         except Post.DoesNotExist:
             return '[untitled]'
 
+    @property
+    def head_id(self):
+        return Post.objects.get(thread=self.pk).pk
+
 class Board(models.Model):
     name = models.CharField(max_length=255, unique=True)
     shortcut = models.CharField(max_length=3, unique=True)

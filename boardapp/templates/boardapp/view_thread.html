@@ -9,8 +9,10 @@
     <body>
         <div class="posts">
             {% for post in posts %}
-                <a href="{% url 'threadView' boardname=thread.board.shortcut threadid=thread.pk %}#{{post.pk}}"><b id="{{post.pk}}">{{post}}</h1></b></a>
-                <p>{{post.content}}</p>
+                <div class="post">
+                    <a href="{% url 'threadView' boardname=thread.board.shortcut threadid=thread.pk %}#{{post.pk}}"><b id="{{post.pk}}">{{post}}</h1></b></a>
+                    <p>{{post.content}}</p>
+                </div>
             {% endfor %}
         </div>
     </body>

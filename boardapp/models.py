@@ -10,20 +10,23 @@ class Post(models.Model):
     thread = models.ForeignKey('Thread', related_name='posts')
 
     def __str__(self):
-        return self.title
+        return self.title or '[untitled]'
 
 class Thread(models.Model):
     board = models.ForeignKey('Board', related_name='threads')
 
     def __str__(self):
         try:
-            return Post.objects.get(thread=self.pk).title
-        except Post.DoesNotExist:
+            return Post.objects.filter(thread=self.pk)[0].title
+        except IndexError:
             return '[untitled]'
 
     @property
     def head_id(self):
-        return Post.objects.get(thread=self.pk).pk
+        try:
+            return Post.objects.filter(thread=self.pk)[0].pk
+        except IndexError:
+            return -1
 
 class Board(models.Model):
     name = models.CharField(max_length=255, unique=True)

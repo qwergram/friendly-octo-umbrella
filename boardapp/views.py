@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, HttpResponse
 from django.views import generic
 from boardapp.models import Board, Thread
 
@@ -32,3 +32,14 @@ class ThreadView(generic.TemplateView):
         context['thread'] = thread
         context['posts'] = thread.posts.all()
         return context
+
+class CreateThread(generic.View):
+
+    def post(self, request):
+        return HttpResponse('hello world!')
+
+
+class CreatePost(generic.View):
+
+    def post(self, request):
+        return HttpResponse('hello world!')

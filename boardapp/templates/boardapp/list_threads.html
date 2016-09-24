@@ -13,6 +13,7 @@
     <div class="createThread">
         <form method="post" action="{% url 'createThread' boardname=board.shortcut %}">
             <h2>Create a thread</h2>
+            {% csrf_token %}
             <label for="title">Title</label><br/>
             <input type="text" name="title" placeholder="thread title"><br/>
             <textarea name="content" placeholder="content"></textarea><br/>

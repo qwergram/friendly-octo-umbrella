@@ -1,17 +1,31 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>{{board.name}}</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="{% static "css/style.css" %}" rel="stylesheet">
-    </head>
-    <body>
-        <ul>
-            {% for thread in threads %}
-                <li><a href="{% url 'threadView' boardname=board.shortcut threadid=board.pk %}">{{thread}}</a></li>
-            {% endfor %}
-        </ul>
-    </body>
+
+<head>
+    <title>{{board.name}}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static " css/style.css " %}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="createThread">
+        <form method="post" action="{% url 'createThread' boardname=board.shortcut %}">
+            <h2>Create a thread</h2>
+            <label for="title">Title</label><br/>
+            <input type="text" name="title" placeholder="thread title"><br/>
+            <textarea name="content" placeholder="content"></textarea><br/>
+            <label for="deletion_password">Deletion Password</label><br/>
+            <input type="password" name="deletion_password" placeholder="deletion password"><br/>
+            <input type="submit">
+        </form>
+    </div>
+    <ul>
+        {% for thread in threads %}
+        <li><a href="{% url 'threadView' boardname=board.shortcut threadid=board.pk %}">{{thread}}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+
 </html>

@@ -1,4 +1,5 @@
-from django.shortcuts import get_object_or_404, HttpResponse
+from django.shortcuts import get_object_or_404, HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 from django.views import generic
 from boardapp.models import Board, Thread, Post
 from boardapp import forms
@@ -49,10 +50,9 @@ class CreateThread(generic.View):
                 thread=new_thread,
             )
             new_post.save()
-
-            return HttpResponse('hello world!')
+            return HttpResponseRedirect(reverse('threadView', kwargs={'boardname':boardname, 'threadid': new_thread.pk}))
         else:
-            return HttpResponse("oops")
+            return HttpResponse("oops something went wrong")
 
 
 class CreatePost(generic.View):

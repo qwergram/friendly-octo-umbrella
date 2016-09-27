@@ -24,7 +24,7 @@
     </div>
     <ul>
         {% for thread in threads %}
-        <li><a href="{% url 'threadView' boardname=board.shortcut threadid=board.pk %}">{{thread}}</a></li>
+        <li><a href="{% url 'threadView' boardname=board.shortcut threadid=thread.pk %}">{{thread}}</a></li>
         {% endfor %}
     </ul>
 </body>

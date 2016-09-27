@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, HttpResponse
-from django.views import generic, View
-from boardapp.models import Board, Thread
+from django.views import generic
+from boardapp.models import Board, Thread, Post
+from boardapp import forms
 
 # Create your views here.
 
@@ -36,10 +37,25 @@ class ThreadView(generic.TemplateView):
 class CreateThread(generic.View):
 
     def post(self, request, boardname):
-        return HttpResponse('hello world!')
+        form = forms.CreateThread(request.POST)
+        if form.is_valid:
+            board = get_object_or_404(Board, shortcut=boardname)
+            new_thread = Thread(board=board)
+            new_thread.save()
+            new_post = Post(
+                title=form.data['title'], 
+                content=form.data['content'],
+                password=form.data.get('deletion_password'),
+                thread=new_thread,
+            )
+            new_post.save()
+
+            return HttpResponse('hello world!')
+        else:
+            return HttpResponse("oops")
 
 
-class CreatePost(View):
+class CreatePost(generic.View):
 
     def post(self, request):
         return HttpResponse('hello world!')

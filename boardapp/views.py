@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, HttpResponse
-from django.views import generic
+from django.views import generic, View
 from boardapp.models import Board, Thread
 
 # Create your views here.
@@ -35,11 +35,11 @@ class ThreadView(generic.TemplateView):
 
 class CreateThread(generic.View):
 
-    def post(self, request):
+    def post(self, request, boardname):
         return HttpResponse('hello world!')
 
 
-class CreatePost(generic.View):
+class CreatePost(View):
 
     def post(self, request):
         return HttpResponse('hello world!')

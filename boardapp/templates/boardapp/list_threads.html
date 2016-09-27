@@ -11,7 +11,7 @@
 
 <body>
     <div class="createThread">
-        <form method="post" action="{% url 'createThread' boardname=board.shortcut %}">
+        <form method="POST" action="{% url 'createThread' boardname=board.shortcut %}">
             <h2>Create a thread</h2>
             {% csrf_token %}
             <label for="title">Title</label><br/>

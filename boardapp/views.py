@@ -60,7 +60,6 @@ class CreatePost(generic.View):
     def post(self, request, boardname, threadid):
         form = forms.CreatePost(request.POST)
         if form.is_valid():
-            board = get_object_or_404(Board, shortcut=boardname)
             thread = get_object_or_404(Thread, pk=threadid)
             post = Post(
                 title=form.data['title'],
@@ -68,5 +67,7 @@ class CreatePost(generic.View):
                 password=form.data.get('deletion_password'),
                 thread=thread
             )
-
-        return HttpResponse('hello world!')
+            post.save()
+            return HttpResponse(reverse('threadView', kwargs={'boardname': boardname, 'threadid': threadid}))
+        else:
+            return HttpResponse('oops something went wrong')

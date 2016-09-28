@@ -1,19 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>{{thread}}</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="css/style.css" rel="stylesheet">
-    </head>
-    <body>
-        <div class="posts">
-            {% for post in posts %}
-                <div class="post">
-                    <a href="{% url 'threadView' boardname=thread.board.shortcut threadid=thread.pk %}#{{post.pk}}"><b id="{{post.pk}}">{{post}}</h1></b></a>
-                    <p>{{post.content}}</p>
-                </div>
-            {% endfor %}
+
+<head>
+    <title>{{thread}}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="posts">
+        {% for post in posts %}
+        <div class="post">
+            <a href="{% url 'threadView' boardname=thread.board.shortcut threadid=thread.pk %}#{{post.pk}}"><b id="{{post.pk}}">#{{post.pk}} - {{post}}</h1></b></a>
+            <p>{{post.content}}</p>
         </div>
-    </body>
+        {% endfor %}
+    </div>
+    <div class="reply">
+        <form method="POST" action="{% url 'createPost' boardname=thread.board.shortcut threadid=thread.pk %}">
+            <h2>Post a Reply</h2>
+            {% csrf_token %}
+            <label for="title">Title</label><br/>
+            <input type="text" name="title" placeholder="post title"><br/>
+            <textarea name="content" placeholder="content"></textarea><br/>
+            <label for="deletion_password">Deletion Password</label><br/>
+            <input type="password" name="deletion_password" placeholder="deletion password"><br/>
+            <input type="submit">
+        </form>
+    </div>
+    <div class="delete-thread">
+        
+
+    </div>
+</body>
+
 </html>

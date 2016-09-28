@@ -14,6 +14,7 @@ class Post(models.Model):
 
 class Thread(models.Model):
     board = models.ForeignKey('Board', related_name='threads')
+    archived = models.BooleanField(default=False)
 
     def __str__(self):
         try:

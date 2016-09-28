@@ -35,6 +35,7 @@ class ThreadView(generic.TemplateView):
         context['posts'] = thread.posts.all()
         return context
 
+
 class CreateThread(generic.View):
 
     def post(self, request, boardname):

@@ -28,6 +28,10 @@ class Thread(models.Model):
         except IndexError:
             return -1
 
+    @property
+    def activity_score(self):
+        return len(Post.objects.filter(thread=self.pk))
+
 class Board(models.Model):
     name = models.CharField(max_length=255, unique=True)
     shortcut = models.CharField(max_length=3, unique=True)

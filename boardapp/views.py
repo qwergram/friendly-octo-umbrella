@@ -39,7 +39,7 @@ class CreateThread(generic.View):
 
     def post(self, request, boardname):
         form = forms.CreateThread(request.POST)
-        if form.is_valid:
+        if form.is_valid():
             board = get_object_or_404(Board, shortcut=boardname)
             new_thread = Thread(board=board)
             new_thread.save()
@@ -57,5 +57,16 @@ class CreateThread(generic.View):
 
 class CreatePost(generic.View):
 
-    def post(self, request):
+    def post(self, request, boardname, threadid):
+        form = forms.CreatePost(request.POST)
+        if form.is_valid():
+            board = get_object_or_404(Board, shortcut=boardname)
+            thread = get_object_or_404(Thread, pk=threadid)
+            post = Post(
+                title=form.data['title'],
+                content=form.data['content'],
+                password=form.data.get('deletion_password'),
+                thread=thread
+            )
+
         return HttpResponse('hello world!')

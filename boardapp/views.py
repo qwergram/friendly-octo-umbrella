@@ -68,6 +68,6 @@ class CreatePost(generic.View):
                 thread=thread
             )
             post.save()
-            return HttpResponse(reverse('threadView', kwargs={'boardname': boardname, 'threadid': threadid}))
+            return HttpResponseRedirect(reverse('threadView', kwargs={'boardname': boardname, 'threadid': threadid}))
         else:
             return HttpResponse('oops something went wrong')
